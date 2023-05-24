@@ -3,7 +3,7 @@ import clsx from 'clsx'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	size: 'sm' | 'md' | 'lg'
-	variant: 'primary' | 'secondary'
+	variant: 'primary' | 'secondary' | 'transparent'
 }
 
 export const Button: FC<ButtonProps> = ({ size, variant, children, ...props }) => {
@@ -18,6 +18,7 @@ export const Button: FC<ButtonProps> = ({ size, variant, children, ...props }) =
 					'rounded-lg px-12 py-8': size === 'lg',
 					'bg-blue-600': variant === 'primary',
 					'bg-blue-100': variant === 'secondary',
+					'bg-transparent': variant === 'transparent',
 				}
 			)}
 			{...props}
