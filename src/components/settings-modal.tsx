@@ -5,8 +5,21 @@ import { ReactComponent as XSvg } from '../assets/icons/ph_x.svg'
 import { Button } from './button'
 import { Switch } from './switch'
 import { InputNumber } from './input-number'
+import { useSettings } from '../context/settings'
 
 export const SettingsModal: FC<{ closeModal: () => void }> = ({ closeModal }) => {
+	const {
+		focusLength,
+		shortBreakLength,
+		longBreakLength,
+		isDarkMode,
+		hasNotifications,
+		setFocusLength,
+		setShortBreakLength,
+		setLongBreakLength,
+		setIsDarkMode,
+		setHasNotifications,
+	} = useSettings()
 	return (
 		<Dialog
 			open
@@ -28,23 +41,44 @@ export const SettingsModal: FC<{ closeModal: () => void }> = ({ closeModal }) =>
 					<ul className='flex flex-col pb-4'>
 						<li className='px-6 h-16 flex justify-between items-center'>
 							<p>Dark mode</p>
-							<Switch />
+							<Switch
+								checked={isDarkMode}
+								onChange={setIsDarkMode}
+							/>
 						</li>
 						<li className='px-6 h-16 flex justify-between items-center'>
 							<p>Focus length</p>
-							<InputNumber defaultValue='25' />
+							<InputNumber
+								value={focusLength}
+								min={1}
+								max={3600}
+								onChange={setFocusLength}
+							/>
 						</li>
 						<li className='px-6 h-16 flex justify-between items-center'>
 							<p>Short break length</p>
-							<InputNumber defaultValue='15' />
+							<InputNumber
+								value={shortBreakLength}
+								min={1}
+								max={3600}
+								onChange={setShortBreakLength}
+							/>
 						</li>
 						<li className='px-6 h-16 flex justify-between items-center'>
 							<p>Long break length</p>
-							<InputNumber defaultValue='5' />
+							<InputNumber
+								value={longBreakLength}
+								min={1}
+								max={3600}
+								onChange={setLongBreakLength}
+							/>
 						</li>
 						<li className='px-6 h-16 flex justify-between items-center'>
 							<p>Notifications</p>
-							<Switch />
+							<Switch
+								checked={hasNotifications}
+								onChange={setHasNotifications}
+							/>
 						</li>
 					</ul>
 				</Dialog.Panel>

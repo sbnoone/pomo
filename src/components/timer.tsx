@@ -1,15 +1,35 @@
+import { FC, useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 import dayjs from 'dayjs'
-import { FC, useEffect, useRef, useState } from 'react'
+import duration from 'dayjs/plugin/duration'
 
-const SECOND_IN_MS = 1000
-const ONE_MINUTE_IN_SEC = 60
-const FIVE_MIN = 5 * ONE_MINUTE_IN_SEC
+dayjs.extend(duration)
 
-export const Timer: FC<{ isPlaying: boolean }> = ({ isPlaying }) => {
-	const currentTime = useRef(FIVE_MIN * SECOND_IN_MS)
+const MS_IN_SECOND = 1000
+const secondsToMs = (s: number) => s * MS_IN_SECOND
+const milisecondsToSec = (ms: number) => ms / MS_IN_SECOND
+
+dayjs.duration({ hours: 20, minutes: 3, seconds: 30 })
+dayjs().add(3600, 's').get('h')
+
+const formatSecondsToMinSec = (s: number): [minutes: string, seconds: string] => {
+	const minutes = Math.floor(dayjs.duration(s, 's').asMinutes())
+	const seconds = s - minutes * 60
+	return [minutes.toString().padStart(2, '0'), seconds.toString().padStart(2, '0')]
+}
+
+export const Timer: FC<{ isPlaying: boolean; initialTimeInSeconds: number }> = ({
+	isPlaying,
+	initialTimeInSeconds,
+}) => {
+	const currentTime = useRef(secondsToMs(initialTimeInSeconds))
 	const previousTime = useRef(currentTime.current)
-	const [timer, setTimer] = useState(FIVE_MIN)
+	const [timer, setTimer] = useState(initialTimeInSeconds)
+
+	useEffect(() => {
+		setTimer(initialTimeInSeconds)
+		currentTime.current = secondsToMs(initialTimeInSeconds)
+	}, [initialTimeInSeconds])
 
 	useEffect(() => {
 		if (!isPlaying || currentTime.current <= 0) return
@@ -30,8 +50,8 @@ export const Timer: FC<{ isPlaying: boolean }> = ({ isPlaying }) => {
 				console.log('cancelAnimationFrame(zero)', rafId, currentTime.current)
 				cancelAnimationFrame(rafId)
 			} else {
-				const seconds = Math.floor(currentTime.current / SECOND_IN_MS)
-				const isUpdate = seconds !== Math.floor(previousTime.current / SECOND_IN_MS)
+				const seconds = Math.floor(milisecondsToSec(currentTime.current))
+				const isUpdate = seconds !== Math.floor(milisecondsToSec(previousTime.current))
 				previousTime.current = currentTime.current
 
 				if (isUpdate) {
@@ -52,9 +72,7 @@ export const Timer: FC<{ isPlaying: boolean }> = ({ isPlaying }) => {
 		}
 	}, [isPlaying])
 
-	const [min, sec] = dayjs(timer * SECOND_IN_MS)
-		.format('mm:ss')
-		.split(':')
+	const [min, sec] = formatSecondsToMinSec(timer)
 
 	return (
 		<div

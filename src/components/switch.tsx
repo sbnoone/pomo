@@ -1,13 +1,12 @@
-import { Switch as HeadlessSwitch } from '@headlessui/react'
+import { Switch as HeadlessSwitch, SwitchProps } from '@headlessui/react'
 import clsx from 'clsx'
-import { useState } from 'react'
+import { FC } from 'react'
 
-export const Switch = () => {
-	const [checked, setChecked] = useState(false)
+export const Switch: FC<SwitchProps<'button'>> = ({ checked, onChange }) => {
 	return (
 		<HeadlessSwitch
 			checked={checked}
-			onChange={setChecked}
+			onChange={onChange}
 			className={clsx('relative inline-flex h-5 w-[34px] items-center rounded-full', {
 				'bg-black-200 dark:bg-white-200': !checked,
 				'bg-blue-600': checked,
