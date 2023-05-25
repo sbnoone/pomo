@@ -1,22 +1,6 @@
 import { FC, useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
-import dayjs from 'dayjs'
-import duration from 'dayjs/plugin/duration'
-
-dayjs.extend(duration)
-
-const MS_IN_SECOND = 1000
-const secondsToMs = (s: number) => s * MS_IN_SECOND
-const milisecondsToSec = (ms: number) => ms / MS_IN_SECOND
-
-dayjs.duration({ hours: 20, minutes: 3, seconds: 30 })
-dayjs().add(3600, 's').get('h')
-
-const formatSecondsToMinSec = (s: number): [minutes: string, seconds: string] => {
-	const minutes = Math.floor(dayjs.duration(s, 's').asMinutes())
-	const seconds = s - minutes * 60
-	return [minutes.toString().padStart(2, '0'), seconds.toString().padStart(2, '0')]
-}
+import { formatSecondsToMinSec, milisecondsToSec, secondsToMs } from '../utils/time'
 
 export const Timer: FC<{ isPlaying: boolean; initialTimeInSeconds: number }> = ({
 	isPlaying,

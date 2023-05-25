@@ -13,19 +13,16 @@ import { ModalProvider } from './context/modal'
 import { useModal } from './hooks/use-modal'
 import { SettingsModal } from './components/settings-modal'
 import { useSettings } from './context/settings'
-import dayjs from 'dayjs'
 
-let s = 0
-function test() {
-	console.log(s)
-	s = (s + 1) % 3
-}
+const TIMER_STATES = ['focus', 'break-short', 'break-long'] as const
+type TimerState = (typeof TIMER_STATES)[number]
 
 function App() {
 	const { focusLength, shortBreakLength, longBreakLength } = useSettings()
-	const [state, setState] = useState<'focus' | 'break-long' | 'break-short'>('focus')
+	const [state, setState] = useState(0)
 	const [isPlaying, setIsPlaying] = useState(false)
 	const [isModalOpen, setIsModalOpen] = useState(false)
+
 	const toggleTimer = () => {
 		setIsPlaying(!isPlaying)
 	}
@@ -35,18 +32,10 @@ function App() {
 
 	const changeState = () => {
 		setIsPlaying(false)
-		if (state === 'focus') {
-			setState('break-short')
-			return
-		}
-		if (state === 'break-short') {
-			setState('break-long')
-			return
-		}
-		setState('focus')
+		setState((s) => (s + 1) % TIMER_STATES.length)
 	}
 
-	const initialTimes = {
+	const initialTimes: Record<TimerState, number> = {
 		focus: focusLength,
 		'break-long': longBreakLength,
 		'break-short': shortBreakLength,
@@ -57,10 +46,10 @@ function App() {
 			{isModalOpen && <SettingsModal closeModal={closeModal} />}
 			<div className='max-w-[340px] px-[10px] m-auto flex-grow'>
 				<div className='flex items-center flex-col gap-y-[32px]'>
-					<Chip variant={state} />
+					<Chip variant={TIMER_STATES[state]} />
 					<Timer
 						isPlaying={isPlaying}
-						initialTimeInSeconds={initialTimes[state]}
+						initialTimeInSeconds={initialTimes[TIMER_STATES[state]]}
 					/>
 					<div className='flex items-center gap-x-4'>
 						<Button
