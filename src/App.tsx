@@ -1,4 +1,3 @@
-import clsx from 'clsx'
 import { useState } from 'react'
 
 import { ReactComponent as PauseSvg } from './assets/icons/ph_pause-fill.svg'
@@ -40,6 +39,7 @@ function App() {
 		'break-long': longBreakLength,
 		'break-short': shortBreakLength,
 	}
+	const initialTimeInSeconds = initialTimes[TIMER_STATES[state]]
 
 	return (
 		<div className='bg-blue-50 dark:bg-blue-950 h-full flex dark:text-blue-50 text-blue-900'>
@@ -49,7 +49,7 @@ function App() {
 					<Chip variant={TIMER_STATES[state]} />
 					<Timer
 						isPlaying={isPlaying}
-						initialTimeInSeconds={initialTimes[TIMER_STATES[state]]}
+						initialTimeInSeconds={initialTimeInSeconds}
 					/>
 					<div className='flex items-center gap-x-4'>
 						<Button

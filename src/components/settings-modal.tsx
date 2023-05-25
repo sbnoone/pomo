@@ -6,6 +6,7 @@ import { Button } from './button'
 import { Switch } from './switch'
 import { InputNumber } from './input-number'
 import { useSettings } from '../context/settings'
+import { useDarkMode } from '../hooks/use-dark-mode'
 
 export const SettingsModal: FC<{ closeModal: () => void }> = ({ closeModal }) => {
 	const {
@@ -17,7 +18,7 @@ export const SettingsModal: FC<{ closeModal: () => void }> = ({ closeModal }) =>
 		setFocusLength,
 		setShortBreakLength,
 		setLongBreakLength,
-		setIsDarkMode,
+		changeDarkMode,
 		setHasNotifications,
 	} = useSettings()
 	return (
@@ -43,7 +44,7 @@ export const SettingsModal: FC<{ closeModal: () => void }> = ({ closeModal }) =>
 							<p>Dark mode</p>
 							<Switch
 								checked={isDarkMode}
-								onChange={setIsDarkMode}
+								onChange={changeDarkMode}
 							/>
 						</li>
 						<li className='px-6 h-16 flex justify-between items-center'>

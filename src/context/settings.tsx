@@ -1,4 +1,5 @@
 import { FC, PropsWithChildren, createContext, useContext, useState } from 'react'
+import { useDarkMode } from '../hooks/use-dark-mode'
 
 const defaultSettings = {
 	focusLength: 25,
@@ -16,9 +17,9 @@ export const SettingsProvider: FC<PropsWithChildren> = ({ children }) => {
 	const [focusLength, setFocusLength] = useState(25)
 	const [shortBreakLength, setShortBreakLength] = useState(5)
 	const [longBreakLength, setLongBreakLength] = useState(15)
-	const [isDarkMode, setIsDarkMode] = useState(false)
 	const [hasNotifications, setHasNotifications] = useState(false)
 
+	const { isDarkMode, changeDarkMode } = useDarkMode()
 	const value = {
 		focusLength,
 		shortBreakLength,
@@ -28,7 +29,7 @@ export const SettingsProvider: FC<PropsWithChildren> = ({ children }) => {
 		setFocusLength,
 		setShortBreakLength,
 		setLongBreakLength,
-		setIsDarkMode,
+		changeDarkMode,
 		setHasNotifications,
 	}
 
