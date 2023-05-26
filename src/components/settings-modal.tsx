@@ -5,8 +5,7 @@ import { ReactComponent as XSvg } from '../assets/icons/ph_x.svg'
 import { Button } from './button'
 import { Switch } from './switch'
 import { InputNumber } from './input-number'
-import { useSettings } from '../context/settings'
-import { useDarkMode } from '../hooks/use-dark-mode'
+import { useSettings } from '../hooks/use-settings'
 
 export const SettingsModal: FC<{ closeModal: () => void }> = ({ closeModal }) => {
 	const {
@@ -18,7 +17,7 @@ export const SettingsModal: FC<{ closeModal: () => void }> = ({ closeModal }) =>
 		setFocusLength,
 		setShortBreakLength,
 		setLongBreakLength,
-		changeDarkMode,
+		setIsDarkMode,
 		setHasNotifications,
 	} = useSettings()
 	return (
@@ -34,6 +33,7 @@ export const SettingsModal: FC<{ closeModal: () => void }> = ({ closeModal }) =>
 						<Button
 							size='sm'
 							variant='transparent'
+							onClick={closeModal}
 						>
 							<XSvg className='w-[18px] h-[18px]' />
 						</Button>
@@ -44,7 +44,7 @@ export const SettingsModal: FC<{ closeModal: () => void }> = ({ closeModal }) =>
 							<p>Dark mode</p>
 							<Switch
 								checked={isDarkMode}
-								onChange={changeDarkMode}
+								onChange={setIsDarkMode}
 							/>
 						</li>
 						<li className='px-6 h-16 flex justify-between items-center'>

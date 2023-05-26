@@ -1,17 +1,31 @@
-import { FC, PropsWithChildren, createContext, useContext, useState } from 'react'
-import { useDarkMode } from '../hooks/use-dark-mode'
+import { FC, PropsWithChildren, createContext, useState } from 'react'
+import { useTheme } from './theme'
 
-const defaultSettings = {
+const defaultSettings: {
+	focusLength: number
+	shortBreakLength: number
+	longBreakLength: number
+	isDarkMode: boolean
+	hasNotifications: boolean
+	setFocusLength: React.Dispatch<React.SetStateAction<number>>
+	setShortBreakLength: React.Dispatch<React.SetStateAction<number>>
+	setLongBreakLength: React.Dispatch<React.SetStateAction<number>>
+	setIsDarkMode: (isDarkMode: boolean) => void
+	setHasNotifications: React.Dispatch<React.SetStateAction<boolean>>
+} = {
 	focusLength: 25,
 	shortBreakLength: 5,
 	longBreakLength: 15,
 	isDarkMode: false,
 	hasNotifications: false,
+	setFocusLength: () => void 0,
+	setShortBreakLength: () => void 0,
+	setLongBreakLength: () => void 0,
+	setIsDarkMode: () => void 0,
+	setHasNotifications: () => void false,
 }
 
-export const SettingsContext = createContext({} as any)
-
-export const useSettings = () => useContext(SettingsContext)
+export const SettingsContext = createContext(defaultSettings)
 
 export const SettingsProvider: FC<PropsWithChildren> = ({ children }) => {
 	const [focusLength, setFocusLength] = useState(25)
@@ -19,7 +33,8 @@ export const SettingsProvider: FC<PropsWithChildren> = ({ children }) => {
 	const [longBreakLength, setLongBreakLength] = useState(15)
 	const [hasNotifications, setHasNotifications] = useState(false)
 
-	const { isDarkMode, changeDarkMode } = useDarkMode()
+	const { isDarkMode, setIsDarkMode } = useTheme()
+
 	const value = {
 		focusLength,
 		shortBreakLength,
@@ -29,7 +44,7 @@ export const SettingsProvider: FC<PropsWithChildren> = ({ children }) => {
 		setFocusLength,
 		setShortBreakLength,
 		setLongBreakLength,
-		changeDarkMode,
+		setIsDarkMode,
 		setHasNotifications,
 	}
 

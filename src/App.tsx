@@ -11,9 +11,9 @@ import { Timer } from './components/timer'
 import { ModalProvider } from './context/modal'
 import { useModal } from './hooks/use-modal'
 import { SettingsModal } from './components/settings-modal'
-import { useSettings } from './context/settings'
+import { useSettings } from './hooks/use-settings'
 
-const TIMER_STATES = ['focus', 'break-short', 'break-long'] as const
+const TIMER_STATES = ['focus', 'break-short', 'focus', 'break-long'] as const
 type TimerState = (typeof TIMER_STATES)[number]
 
 function App() {
