@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { ReactComponent as PauseSvg } from './assets/icons/ph_pause-fill.svg'
 import { ReactComponent as PlaySvg } from './assets/icons/ph_play-fill.svg'
@@ -12,12 +12,13 @@ import { ModalProvider } from './context/modal'
 import { useModal } from './hooks/use-modal'
 import { SettingsModal } from './components/settings-modal'
 import { useSettings } from './hooks/use-settings'
+import { toast } from 'react-hot-toast'
 
 const TIMER_STATES = ['focus', 'break-short', 'focus', 'break-long'] as const
 type TimerState = (typeof TIMER_STATES)[number]
 
 function App() {
-	const { focusLength, shortBreakLength, longBreakLength } = useSettings()
+	const { focusLength, shortBreakLength, longBreakLength, hasNotifications } = useSettings()
 	const [state, setState] = useState(0)
 	const [isPlaying, setIsPlaying] = useState(false)
 	const [isModalOpen, setIsModalOpen] = useState(false)
@@ -40,6 +41,12 @@ function App() {
 		'break-short': shortBreakLength,
 	}
 	const initialTimeInSeconds = initialTimes[TIMER_STATES[state]]
+
+	useEffect(() => {
+		if (hasNotifications) {
+			toast.success(TIMER_STATES[state])
+		}
+	}, [state, hasNotifications])
 
 	return (
 		<div className='bg-blue-50 dark:bg-blue-950 h-full flex dark:text-blue-50 text-blue-900'>

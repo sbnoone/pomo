@@ -6,18 +6,18 @@ import { Button } from './button'
 import { Switch } from './switch'
 import { InputNumber } from './input-number'
 import { useSettings } from '../hooks/use-settings'
+import { useTheme } from '../hooks/use-theme'
 
 export const SettingsModal: FC<{ closeModal: () => void }> = ({ closeModal }) => {
+	const { isDarkMode, setIsDarkMode } = useTheme()
 	const {
 		focusLength,
 		shortBreakLength,
 		longBreakLength,
-		isDarkMode,
 		hasNotifications,
 		setFocusLength,
 		setShortBreakLength,
 		setLongBreakLength,
-		setIsDarkMode,
 		setHasNotifications,
 	} = useSettings()
 	return (

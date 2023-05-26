@@ -1,11 +1,9 @@
 import { FC, PropsWithChildren, createContext, useContext, useEffect, useState } from 'react'
 
-const ThemeContext = createContext({
+export const ThemeContext = createContext({
 	isDarkMode: false,
 	setIsDarkMode: (isDarkMode: boolean): void => void 0,
 })
-
-export const useTheme = () => useContext(ThemeContext)
 
 const THEME_MODE_KEY = 'pomo-theme-mode'
 
