@@ -1,4 +1,5 @@
 import { FC, PropsWithChildren, createContext, useState } from 'react'
+import { getSettings } from '../storage/settings'
 
 const defaultSettings: {
 	focusLength: number
@@ -22,11 +23,14 @@ const defaultSettings: {
 
 export const SettingsContext = createContext(defaultSettings)
 
+// Top level await is great!
+const initialSettings = await getSettings()
+
 export const SettingsProvider: FC<PropsWithChildren> = ({ children }) => {
-	const [focusLength, setFocusLength] = useState(25)
-	const [shortBreakLength, setShortBreakLength] = useState(5)
-	const [longBreakLength, setLongBreakLength] = useState(15)
-	const [hasNotifications, setHasNotifications] = useState(false)
+	const [focusLength, setFocusLength] = useState(initialSettings?.focusLength ?? 25)
+	const [shortBreakLength, setShortBreakLength] = useState(initialSettings?.shortBreakLength ?? 5)
+	const [longBreakLength, setLongBreakLength] = useState(initialSettings?.longBreakLength ?? 15)
+	const [hasNotifications, setHasNotifications] = useState(initialSettings?.notifications ?? true)
 
 	const value = {
 		focusLength,
