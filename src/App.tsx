@@ -59,7 +59,10 @@ function App() {
 
 	return (
 		<div className='bg-blue-50 dark:bg-blue-950 h-full flex dark:text-blue-50 text-blue-900'>
-			{isModalOpen && <SettingsModal closeModal={closeModal} />}
+			<SettingsModal
+				closeModal={closeModal}
+				isOpen={isModalOpen}
+			/>
 			<div className='max-w-[340px] px-[10px] m-auto flex-grow'>
 				<div className='flex items-center flex-col gap-y-[32px]'>
 					<Chip variant={TIMER_STATES[state]} />
@@ -73,6 +76,7 @@ function App() {
 							variant='secondary'
 							onClick={openModal}
 						>
+							<span className='sr-only'>settings</span>
 							<DotsSvg />
 						</Button>
 						<Button
@@ -80,6 +84,7 @@ function App() {
 							variant='primary'
 							onClick={toggleTimer}
 						>
+							<span className='sr-only'>{isPlaying ? 'pause' : 'play'}</span>
 							{isPlaying ? <PauseSvg /> : <PlaySvg />}
 						</Button>
 						<Button
@@ -87,6 +92,7 @@ function App() {
 							variant='secondary'
 							onClick={changeState}
 						>
+							<span className='sr-only'>next state</span>
 							<ForwardSvg />
 						</Button>
 					</div>

@@ -60,7 +60,7 @@ export const Timer: FC<{ isPlaying: boolean; initialTimeInSeconds: number }> = (
 
 	return (
 		<div
-			className={clsx('text-[256px] flex flex-col leading-[85%] overflow-hidden', {
+			className={clsx('text-[256px] flex flex-col leading-[85%] overflow-hidden select-none', {
 				'font-extralight': !isPlaying,
 				'font-extrabold': isPlaying,
 			})}
