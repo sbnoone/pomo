@@ -15,7 +15,7 @@ export const Switch: FC<SwitchProps<'button'>> = ({ checked, onChange }) => {
 			<span className='sr-only'>Enable dark mode</span>
 			<span
 				className={clsx(
-					'inline-block h-4 w-4 transform rounded-full bg-blue-50 dark:bg-blue-950 transition',
+					'inline-block h-4 w-4 transform rounded-full bg-blue-50 dark:bg-blue-900 transition',
 					{
 						'translate-x-0.5': !checked,
 						'translate-x-4': checked,
