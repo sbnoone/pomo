@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 
 import { ReactComponent as PauseSvg } from './assets/icons/ph_pause-fill.svg'
@@ -13,10 +13,9 @@ import { ModalProvider } from './context/modal'
 import { useModal } from './hooks/use-modal'
 import { SettingsModal } from './components/settings-modal'
 import { useSettings } from './hooks/use-settings'
-import { getSettings } from './storage/settings'
-
-const TIMER_STATES = ['focus', 'break-short', 'focus', 'break-long'] as const
-type TimerState = (typeof TIMER_STATES)[number]
+import { getTimerState, setTimerState } from './storage/settings'
+import { TimerState } from './types'
+import { TIMER_STATES } from './app-constants'
 
 const notificationMessages: Record<TimerState, string> = {
 	focus: 'Focus',
@@ -24,9 +23,11 @@ const notificationMessages: Record<TimerState, string> = {
 	'break-long': 'Long break',
 }
 
+const initialState = await getTimerState()
+
 function App() {
 	const { focusLength, shortBreakLength, longBreakLength, hasNotifications } = useSettings()
-	const [state, setState] = useState(0)
+	const [state, setState] = useState(initialState ?? 0)
 	const [isPlaying, setIsPlaying] = useState(false)
 	const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -39,7 +40,10 @@ function App() {
 
 	const changeState = () => {
 		setIsPlaying(false)
-		setState((s) => (s + 1) % TIMER_STATES.length)
+
+		const nextState = (state + 1) % TIMER_STATES.length
+		setState(nextState)
+		setTimerState(nextState)
 
 		if (hasNotifications) {
 			toast.success(`Current state - ${notificationMessages[TIMER_STATES[state]]}`)
