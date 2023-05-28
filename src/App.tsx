@@ -15,13 +15,7 @@ import { SettingsModal } from './components/settings-modal'
 import { useSettings } from './hooks/use-settings'
 import { getTimerState, setTimerState } from './storage/settings'
 import { TimerState } from './types'
-import { TIMER_STATES } from './app-constants'
-
-const notificationMessages: Record<TimerState, string> = {
-	focus: 'Focus',
-	'break-short': 'Short break',
-	'break-long': 'Long break',
-}
+import { NOTIFICATION_MESSAGES, TIMER_STATES } from './app-constants'
 
 const initialState = await getTimerState()
 
@@ -38,16 +32,24 @@ function App() {
 	const openModal = () => setIsModalOpen(true)
 	const closeModal = () => setIsModalOpen(false)
 
-	const changeState = () => {
+	const nextStep = () => {
 		setIsPlaying(false)
-
 		const nextState = (state + 1) % TIMER_STATES.length
 		setState(nextState)
 		setTimerState(nextState)
+	}
+
+	const changeState = () => {
+		nextStep()
 
 		if (hasNotifications) {
-			toast.success(`Current state - ${notificationMessages[TIMER_STATES[state]]}`)
+			toast.success(`Current state - ${NOTIFICATION_MESSAGES[TIMER_STATES[state]]}`)
 		}
+	}
+
+	const onTimerComplete = () => {
+		nextStep()
+		toast.success(`${NOTIFICATION_MESSAGES[TIMER_STATES[state]]} timer is complete!`)
 	}
 
 	const initialTimes: Record<TimerState, number> = {
@@ -67,6 +69,7 @@ function App() {
 				<div className='flex items-center flex-col gap-y-[32px]'>
 					<Chip variant={TIMER_STATES[state]} />
 					<Timer
+						onComplete={onTimerComplete}
 						isPlaying={isPlaying}
 						initialTimeInSeconds={initialTimeInSeconds}
 					/>

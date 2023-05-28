@@ -2,10 +2,11 @@ import { FC, useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 import { formatSecondsToMinSec, milisecondsToSec, secondsToMs } from '../utils/time'
 
-export const Timer: FC<{ isPlaying: boolean; initialTimeInSeconds: number }> = ({
-	isPlaying,
-	initialTimeInSeconds,
-}) => {
+export const Timer: FC<{
+	isPlaying: boolean
+	initialTimeInSeconds: number
+	onComplete?: () => void
+}> = ({ isPlaying, initialTimeInSeconds, onComplete }) => {
 	const currentTime = useRef(secondsToMs(initialTimeInSeconds))
 	const previousTime = useRef(currentTime.current)
 	const [timer, setTimer] = useState(initialTimeInSeconds)
@@ -31,8 +32,9 @@ export const Timer: FC<{ isPlaying: boolean; initialTimeInSeconds: number }> = (
 
 			if (currentTime.current <= 0) {
 				setTimer(0)
-				console.log('cancelAnimationFrame(zero)', rafId, currentTime.current)
 				cancelAnimationFrame(rafId)
+				onComplete?.()
+				// toast(`${NOTIFICATION_MESSAGES[TIMER_STATES[state]]} timer is complete!`)
 			} else {
 				const seconds = Math.floor(milisecondsToSec(currentTime.current))
 				const isUpdate = seconds !== Math.floor(milisecondsToSec(previousTime.current))
