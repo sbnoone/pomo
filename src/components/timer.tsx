@@ -34,7 +34,6 @@ export const Timer: FC<{
 				setTimer(0)
 				cancelAnimationFrame(rafId)
 				onComplete?.()
-				// toast(`${NOTIFICATION_MESSAGES[TIMER_STATES[state]]} timer is complete!`)
 			} else {
 				const seconds = Math.floor(milisecondsToSec(currentTime.current))
 				const isUpdate = seconds !== Math.floor(milisecondsToSec(previousTime.current))
@@ -53,7 +52,6 @@ export const Timer: FC<{
 		rafId = requestAnimationFrame(step)
 
 		return () => {
-			console.log('cancelAnimationFrame(pause)', rafId, currentTime.current)
 			cancelAnimationFrame(rafId)
 		}
 	}, [isPlaying])
