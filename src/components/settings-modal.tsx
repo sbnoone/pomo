@@ -5,9 +5,9 @@ import { ReactComponent as XSvg } from '../assets/icons/ph_x.svg'
 import { Button } from './button'
 import { Switch } from './switch'
 import { InputNumber } from './input-number'
-import { useSettings } from '../hooks/use-settings'
 import { useTheme } from '../hooks/use-theme'
 import { MAX_TIME_IN_SECONDS, MIN_TIME_IN_SECONDS } from '../app-constants'
+import { useSettings } from '../store/settings'
 
 export const SettingsModal: FC<{ closeModal: () => void; isOpen?: boolean }> = ({
 	closeModal,
@@ -70,7 +70,7 @@ export const SettingsModal: FC<{ closeModal: () => void; isOpen?: boolean }> = (
 										value={focusLength}
 										min={MIN_TIME_IN_SECONDS}
 										max={MAX_TIME_IN_SECONDS}
-										onChange={setFocusLength}
+										handleChange={setFocusLength}
 									/>
 								</li>
 								<li className='px-6 h-16 flex justify-between items-center'>
@@ -79,7 +79,7 @@ export const SettingsModal: FC<{ closeModal: () => void; isOpen?: boolean }> = (
 										value={shortBreakLength}
 										min={MIN_TIME_IN_SECONDS}
 										max={MAX_TIME_IN_SECONDS}
-										onChange={setShortBreakLength}
+										handleChange={setShortBreakLength}
 									/>
 								</li>
 								<li className='px-6 h-16 flex justify-between items-center'>
@@ -88,7 +88,7 @@ export const SettingsModal: FC<{ closeModal: () => void; isOpen?: boolean }> = (
 										value={longBreakLength}
 										min={MIN_TIME_IN_SECONDS}
 										max={MAX_TIME_IN_SECONDS}
-										onChange={setLongBreakLength}
+										handleChange={setLongBreakLength}
 									/>
 								</li>
 								<li className='px-6 h-16 flex justify-between items-center'>

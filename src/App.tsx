@@ -9,13 +9,11 @@ import { ReactComponent as ForwardSvg } from './assets/icons/ph_fast-forward-fil
 import { Chip } from './components/chip'
 import { Button } from './components/button'
 import { Timer } from './components/timer'
-import { ModalProvider } from './context/modal'
-import { useModal } from './hooks/use-modal'
 import { SettingsModal } from './components/settings-modal'
-import { useSettings } from './hooks/use-settings'
 import { getTimerState, setTimerState } from './storage/settings'
 import { TimerState } from './types'
 import { NOTIFICATION_MESSAGES, TIMER_STATES } from './app-constants'
+import { useSettings } from './store/settings'
 
 const initialState = await getTimerState()
 
