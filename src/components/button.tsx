@@ -16,8 +16,8 @@ export const Button: FC<ButtonProps> = ({ size, variant, children, ...props }) =
 					'rounded-sm p-2': size === 'sm',
 					'rounded-md p-4 xs:p-6': size === 'md',
 					'rounded-lg px-10 py-6 xs:px-12 xs:py-8': size === 'lg',
-					'bg-blue-600 hover:bg-blue-700 active:bg-blue-800': variant === 'primary',
-					'bg-blue-100 hover:bg-blue-200 active:bg-blue-300': variant === 'secondary',
+					'bg-blue-a-600 hover:bg-blue-a-700 active:bg-blue-a-800': variant === 'primary',
+					'bg-blue-a-100 hover:bg-blue-a-200 active:bg-blue-a-300': variant === 'secondary',
 					'bg-transparent': variant === 'transparent',
 				}
 			)}

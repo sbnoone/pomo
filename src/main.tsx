@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 			<Toaster
 				position='top-right'
 				toastOptions={{
-					className: 'bg-blue-600 dark:text-blue-50 text-blue-900',
+					className: 'bg-blue-a-600 dark:text-blue-50 text-blue-900',
 				}}
 			/>
 			<App />
