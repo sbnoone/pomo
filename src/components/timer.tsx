@@ -54,7 +54,7 @@ export const Timer: FC<{
 		return () => {
 			cancelAnimationFrame(rafId)
 		}
-	}, [isPlaying])
+	}, [isPlaying, onComplete])
 
 	const [min, sec] = formatSecondsToMinSec(timer)
 

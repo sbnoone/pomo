@@ -9,7 +9,7 @@ import { useTheme } from '../hooks/use-theme'
 import { MAX_TIME_IN_SECONDS, MIN_TIME_IN_SECONDS } from '../app-constants'
 import { useSettings } from '../store/settings'
 
-export const SettingsModal: FC<{ closeModal: () => void; isOpen?: boolean }> = ({
+export const SettingsModal: FC<{ closeModal: () => void; isOpen: boolean }> = ({
 	closeModal,
 	isOpen,
 }) => {
@@ -67,6 +67,7 @@ export const SettingsModal: FC<{ closeModal: () => void; isOpen?: boolean }> = (
 								<li className='px-6 h-16 flex justify-between items-center'>
 									<p>Focus length (s)</p>
 									<InputNumber
+										step={1}
 										value={focusLength}
 										min={MIN_TIME_IN_SECONDS}
 										max={MAX_TIME_IN_SECONDS}
@@ -76,6 +77,7 @@ export const SettingsModal: FC<{ closeModal: () => void; isOpen?: boolean }> = (
 								<li className='px-6 h-16 flex justify-between items-center'>
 									<p>Short break length (s)</p>
 									<InputNumber
+										step={1}
 										value={shortBreakLength}
 										min={MIN_TIME_IN_SECONDS}
 										max={MAX_TIME_IN_SECONDS}
@@ -85,6 +87,7 @@ export const SettingsModal: FC<{ closeModal: () => void; isOpen?: boolean }> = (
 								<li className='px-6 h-16 flex justify-between items-center'>
 									<p>Long break length (s)</p>
 									<InputNumber
+										step={1}
 										value={longBreakLength}
 										min={MIN_TIME_IN_SECONDS}
 										max={MAX_TIME_IN_SECONDS}

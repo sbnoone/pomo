@@ -14,8 +14,8 @@ export const Button: FC<ButtonProps> = ({ size, variant, children, ...props }) =
 				'text-blue-900 dark:text-blue-50 dark:[&>svg_path]:stroke-blue-50 dark:[&>svg_path]:fill-blue-50 transition-colors',
 				{
 					'rounded-sm p-2': size === 'sm',
-					'rounded-md p-6': size === 'md',
-					'rounded-lg px-12 py-8': size === 'lg',
+					'rounded-md p-4 xs:p-6': size === 'md',
+					'rounded-lg px-10 py-6 xs:px-12 xs:py-8': size === 'lg',
 					'bg-blue-600 hover:bg-blue-700 active:bg-blue-800': variant === 'primary',
 					'bg-blue-100 hover:bg-blue-200 active:bg-blue-300': variant === 'secondary',
 					'bg-transparent': variant === 'transparent',

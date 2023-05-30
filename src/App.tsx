@@ -64,14 +64,14 @@ function App() {
 				isOpen={isModalOpen}
 			/>
 			<div className='max-w-[340px] px-[10px] m-auto flex-grow'>
-				<div className='flex items-center flex-col gap-y-[32px]'>
+				<div className='flex items-center flex-col gap-y-3 md:gap-y-8'>
 					<Chip variant={TIMER_STATES[state]} />
 					<Timer
 						onComplete={onTimerComplete}
 						isPlaying={isPlaying}
 						initialTimeInSeconds={initialTimeInSeconds}
 					/>
-					<div className='flex items-center gap-x-4'>
+					<div className='flex items-center gap-x-2 xs:gap-x-4'>
 						<Button
 							size='md'
 							variant='secondary'

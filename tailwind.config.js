@@ -45,6 +45,9 @@ export default {
 				md: '24px',
 				lg: '32px',
 			},
+			screens: {
+				xs: '400px',
+			},
 		},
 	},
 	plugins: [],
