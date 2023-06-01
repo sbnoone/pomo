@@ -15,4 +15,22 @@
 	input[type='number']::-webkit-inner-spin-button {
 		-webkit-appearance: none;
 	}
+
+	:root {
+		--primary-50: #f2f9ff;
+		--primary-900: #153047;
+		--primary-950: #04090d;
+	}
+
+	.green {
+		--primary-50: #f2fff5;
+		--primary-900: #14401d;
+		--primary-950: #040d06;
+	}
+
+	.red {
+		--primary-50: #fff2f2;
+		--primary-900: #471515;
+		--primary-950: #0d0404;
+	}
 }

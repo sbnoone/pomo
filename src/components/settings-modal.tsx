@@ -8,12 +8,15 @@ import { InputNumber } from './input-number'
 import { useTheme } from '../hooks/use-theme'
 import { MAX_TIME_IN_SECONDS, MIN_TIME_IN_SECONDS } from '../app-constants'
 import { useSettings } from '../store/settings'
+import { useSchema } from '../hooks/use-schema'
+import { SchemasEnum } from '../context/shema'
 
 export const SettingsModal: FC<{ closeModal: () => void; isOpen: boolean }> = ({
 	closeModal,
 	isOpen,
 }) => {
 	const { isDarkMode, setIsDarkMode } = useTheme()
+	const { schema, changeSchema } = useSchema()
 	const {
 		focusLength,
 		shortBreakLength,
@@ -100,6 +103,12 @@ export const SettingsModal: FC<{ closeModal: () => void; isOpen: boolean }> = ({
 										checked={hasNotifications}
 										onChange={setHasNotifications}
 									/>
+								</li>
+								<li className='px-6 h-16 flex justify-between items-center'>
+									<p>Color schema</p>
+									<button onClick={() => changeSchema(SchemasEnum.blue)}>Blue</button>
+									<button onClick={() => changeSchema(SchemasEnum.green)}>Green</button>
+									<button onClick={() => changeSchema(SchemasEnum.red)}>Red</button>
 								</li>
 							</ul>
 						</Dialog.Panel>
