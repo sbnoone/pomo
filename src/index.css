@@ -16,7 +16,8 @@
 		-webkit-appearance: none;
 	}
 
-	:root {
+	:root,
+	.blue {
 		--primary-50: #f2f9ff;
 		--primary-900: #153047;
 		--primary-950: #04090d;

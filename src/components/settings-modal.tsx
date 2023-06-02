@@ -10,13 +10,14 @@ import { MAX_TIME_IN_SECONDS, MIN_TIME_IN_SECONDS } from '../app-constants'
 import { useSettings } from '../store/settings'
 import { ColorsPaletteEnum } from '../context/color-palette'
 import { useColorPalette } from '../hooks/use-schema'
+import { ColorPaletteRadioGroup } from './color-palette-radio-group'
 
 export const SettingsModal: FC<{ closeModal: () => void; isOpen: boolean }> = ({
 	closeModal,
 	isOpen,
 }) => {
 	const { isDarkMode, setIsDarkMode } = useTheme()
-	const { colorPalette, changeColorPalette } = useColorPalette()
+	// const { colorPalette, changeColorPalette } = useColorPalette()
 	const {
 		focusLength,
 		shortBreakLength,
@@ -104,11 +105,10 @@ export const SettingsModal: FC<{ closeModal: () => void; isOpen: boolean }> = ({
 										onChange={setHasNotifications}
 									/>
 								</li>
+
 								<li className='px-6 h-16 flex justify-between items-center'>
-									<p>Color schema</p>
-									<button onClick={() => changeColorPalette(ColorsPaletteEnum.blue)}>Blue</button>
-									<button onClick={() => changeColorPalette(ColorsPaletteEnum.green)}>Green</button>
-									<button onClick={() => changeColorPalette(ColorsPaletteEnum.red)}>Red</button>
+									<p>Color palette</p>
+									<ColorPaletteRadioGroup />
 								</li>
 							</ul>
 						</Dialog.Panel>
