@@ -36,7 +36,7 @@ export const SettingsModal: FC<{ closeModal: () => void; isOpen: boolean }> = ({
 		>
 			<Dialog
 				onClose={closeModal}
-				className='relative z-50 text-blue-900 dark:text-blue-50'
+				className='relative z-50 text-primary-900 dark:text-primary-50'
 			>
 				<div className='fixed inset-0 flex items-center justify-center p-4'>
 					<Transition.Child
@@ -48,7 +48,7 @@ export const SettingsModal: FC<{ closeModal: () => void; isOpen: boolean }> = ({
 						leaveFrom='opacity-100 scale-100'
 						leaveTo='opacity-0 scale-95'
 					>
-						<Dialog.Panel className='flex flex-col bg-blue-50 dark:bg-blue-900 max-w-[448px] rounded-md shadow-modal w-full overflow-hidden'>
+						<Dialog.Panel className='flex flex-col bg-primary-50 dark:bg-primary-900 max-w-[448px] rounded-md shadow-modal w-full overflow-hidden'>
 							<Dialog.Title className='font-bold flex justify-between p-6'>
 								<span className='text-lg leading-7'>Settings</span>
 								<Button

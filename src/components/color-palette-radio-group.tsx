@@ -1,14 +1,12 @@
 import { RadioGroup } from '@headlessui/react'
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
+import clsx from 'clsx'
+
 import { ColorsPaletteEnum, colorsPalette } from '../context/color-palette'
 import { useColorPalette } from '../hooks/use-schema'
-import clsx from 'clsx'
 
 export const ColorPaletteRadioGroup = () => {
 	const { colorPalette, changeColorPalette } = useColorPalette()
-
-	// const [palette, setPalette] = useState<ColorsPaletteEnum>(colorsPalette[0])
-	console.log(colorPalette)
 	return (
 		<RadioGroup
 			value={colorPalette}
@@ -25,11 +23,13 @@ export const ColorPaletteRadioGroup = () => {
 						value={color}
 						as={Fragment}
 					>
-						{({ active, checked }) => (
+						{({ checked }) => (
 							<li
 								className={clsx(
-									'w-6 h-6 rounded-full bg-black-200 dark:bg-white-200 relative before:absolute before:w-4 before:h-4 before:rounded-full before:top-1 before:left-1 cursor-pointer before:bg-primary-a-600',
+									'w-6 h-6 rounded-full bg-black-100 dark:bg-white-100 relative before:absolute before:w-4 before:h-4 before:rounded-full before:top-1 before:left-1 cursor-pointer  hover:before:bg-primary-a-700 transition-colors',
 									{
+										'before:bg-primary-a-800': checked,
+										'before:bg-primary-a-300': !checked,
 										red: color === ColorsPaletteEnum.red,
 										green: color === ColorsPaletteEnum.green,
 										blue: color === ColorsPaletteEnum.blue,
