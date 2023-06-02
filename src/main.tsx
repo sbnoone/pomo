@@ -5,12 +5,12 @@ import { Toaster } from 'react-hot-toast'
 import App from './App.tsx'
 import { ThemeProvider } from './context/theme.tsx'
 import './index.css'
-import { SchemaProvider } from './context/shema.tsx'
+import { ColorPaletteProvider } from './context/color-palette.tsx'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
 		<ThemeProvider>
-			<SchemaProvider>
+			<ColorPaletteProvider>
 				<Toaster
 					position='top-right'
 					toastOptions={{
@@ -18,7 +18,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 					}}
 				/>
 				<App />
-			</SchemaProvider>
+			</ColorPaletteProvider>
 		</ThemeProvider>
 	</React.StrictMode>
 )

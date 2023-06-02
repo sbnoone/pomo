@@ -20,17 +20,37 @@
 		--primary-50: #f2f9ff;
 		--primary-900: #153047;
 		--primary-950: #04090d;
+
+		--primary-a-100: rgba(76, 172, 255, 0.15);
+		--primary-a-200: rgba(76, 172, 255, 0.24);
+		--primary-a-300: rgba(76, 172, 255, 0.33);
+		--primary-a-600: rgba(76, 172, 255, 0.62);
+		--primary-a-700: rgba(76, 172, 255, 0.71);
+		--primary-a-800: rgba(76, 172, 255, 0.81);
 	}
 
 	.green {
 		--primary-50: #f2fff5;
 		--primary-900: #14401d;
 		--primary-950: #040d06;
-	}
 
+		--primary-a-100: rgba(77, 218, 110, 0.15);
+		--primary-a-200: rgba(77, 218, 110, 0.24);
+		--primary-a-300: rgba(77, 218, 110, 0.33);
+		--primary-a-600: rgba(77, 218, 110, 0.62);
+		--primary-a-700: rgba(77, 218, 110, 0.71);
+		--primary-a-800: rgba(77, 218, 110, 0.81);
+	}
 	.red {
 		--primary-50: #fff2f2;
 		--primary-900: #471515;
 		--primary-950: #0d0404;
+
+		--primary-a-100: rgba(255, 76, 76, 0.15);
+		--primary-a-200: rgba(255, 76, 76, 0.24);
+		--primary-a-300: rgba(255, 76, 76, 0.33);
+		--primary-a-600: rgba(255, 76, 76, 0.62);
+		--primary-a-700: rgba(255, 76, 76, 0.71);
+		--primary-a-800: rgba(255, 76, 76, 0.81);
 	}
 }

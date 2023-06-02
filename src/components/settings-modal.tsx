@@ -8,15 +8,15 @@ import { InputNumber } from './input-number'
 import { useTheme } from '../hooks/use-theme'
 import { MAX_TIME_IN_SECONDS, MIN_TIME_IN_SECONDS } from '../app-constants'
 import { useSettings } from '../store/settings'
-import { useSchema } from '../hooks/use-schema'
-import { SchemasEnum } from '../context/shema'
+import { ColorsPaletteEnum } from '../context/color-palette'
+import { useColorPalette } from '../hooks/use-schema'
 
 export const SettingsModal: FC<{ closeModal: () => void; isOpen: boolean }> = ({
 	closeModal,
 	isOpen,
 }) => {
 	const { isDarkMode, setIsDarkMode } = useTheme()
-	const { schema, changeSchema } = useSchema()
+	const { colorPalette, changeColorPalette } = useColorPalette()
 	const {
 		focusLength,
 		shortBreakLength,
@@ -106,9 +106,9 @@ export const SettingsModal: FC<{ closeModal: () => void; isOpen: boolean }> = ({
 								</li>
 								<li className='px-6 h-16 flex justify-between items-center'>
 									<p>Color schema</p>
-									<button onClick={() => changeSchema(SchemasEnum.blue)}>Blue</button>
-									<button onClick={() => changeSchema(SchemasEnum.green)}>Green</button>
-									<button onClick={() => changeSchema(SchemasEnum.red)}>Red</button>
+									<button onClick={() => changeColorPalette(ColorsPaletteEnum.blue)}>Blue</button>
+									<button onClick={() => changeColorPalette(ColorsPaletteEnum.green)}>Green</button>
+									<button onClick={() => changeColorPalette(ColorsPaletteEnum.red)}>Red</button>
 								</li>
 							</ul>
 						</Dialog.Panel>

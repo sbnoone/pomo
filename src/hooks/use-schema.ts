@@ -1,4 +1,4 @@
 import { useContext } from 'react'
-import { SchemaContext } from '../context/shema'
+import { ColorPaletteContext } from '../context/color-palette'
 
-export const useSchema = () => useContext(SchemaContext)
+export const useColorPalette = () => useContext(ColorPaletteContext)
