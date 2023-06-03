@@ -7,3 +7,16 @@ export const NOTIFICATION_MESSAGES: Record<(typeof TIMER_STATES)[number], string
 	'break-short': 'Short break',
 	'break-long': 'Long break',
 }
+
+export enum ColorsPaletteEnum {
+	blue = 'blue',
+	green = 'green',
+	red = 'red',
+}
+
+export const colorsPalette = Object.values(ColorsPaletteEnum)
+
+export enum ThemeModeEnum {
+	light = 'light',
+	dark = 'dark',
+}

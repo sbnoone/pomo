@@ -5,12 +5,12 @@ import { ReactComponent as XSvg } from '../assets/icons/ph_x.svg'
 import { Button } from './button'
 import { Switch } from './switch'
 import { InputNumber } from './input-number'
-import { useTheme } from '../hooks/use-theme'
+
 import { MAX_TIME_IN_SECONDS, MIN_TIME_IN_SECONDS } from '../app-constants'
 import { useSettings } from '../store/settings'
-import { ColorsPaletteEnum } from '../context/color-palette'
 import { useColorPalette } from '../hooks/use-schema'
 import { ColorPaletteRadioGroup } from './color-palette-radio-group'
+import { useTheme } from '../hooks/use-theme'
 
 export const SettingsModal: FC<{ closeModal: () => void; isOpen: boolean }> = ({
 	closeModal,

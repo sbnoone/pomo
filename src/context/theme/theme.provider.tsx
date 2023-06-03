@@ -1,17 +1,7 @@
-import { FC, PropsWithChildren, createContext, useEffect, useState } from 'react'
-import { getIsDarkMode, setDarkMode } from '../storage/settings'
-
-interface IThemeContext {
-	isDarkMode: boolean
-	setIsDarkMode: (isDarkMode: boolean) => void
-}
-
-export const ThemeContext = createContext({} as IThemeContext)
-
-enum ThemeModeEnum {
-	light = 'light',
-	dark = 'dark',
-}
+import { FC, PropsWithChildren, useEffect, useState } from 'react'
+import { getIsDarkMode, setDarkMode } from '../../storage/settings'
+import { ThemeModeEnum } from '../../app-constants'
+import { ThemeContext } from './theme.context'
 
 const initialIsDarkMode = await getIsDarkMode()
 

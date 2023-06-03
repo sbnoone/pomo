@@ -2,10 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Toaster } from 'react-hot-toast'
 
-import App from './App.tsx'
-import { ThemeProvider } from './context/theme.tsx'
+import { ColorPaletteProvider } from './context/color-palette/color-palette.provider'
+import { ThemeProvider } from './context/theme/theme.provider'
+import App from './App'
 import './index.css'
-import { ColorPaletteProvider } from './context/color-palette.tsx'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<React.StrictMode>
@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 				<Toaster
 					position='top-right'
 					toastOptions={{
-						className: 'bg-blue-a-600 dark:text-blue-50 text-blue-900',
+						className: 'bg-primary-a-600 dark:text-primary-50 text-primary-900',
 					}}
 				/>
 				<App />

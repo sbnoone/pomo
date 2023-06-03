@@ -1,19 +1,6 @@
-import { FC, PropsWithChildren, createContext, useState } from 'react'
-
-interface IColorsPaletteContext {
-	colorPalette: ColorsPaletteEnum
-	changeColorPalette: (schema: ColorsPaletteEnum) => void
-}
-
-export const ColorPaletteContext = createContext({} as IColorsPaletteContext)
-
-export enum ColorsPaletteEnum {
-	blue = 'blue',
-	green = 'green',
-	red = 'red',
-}
-
-export const colorsPalette = Object.values(ColorsPaletteEnum)
+import { FC, PropsWithChildren, useState } from 'react'
+import { ColorsPaletteEnum, colorsPalette } from '../../app-constants'
+import { ColorPaletteContext } from './color-palette.context'
 
 // const initialIsDarkMode = await getIsDarkMode()
 
