@@ -1,6 +1,8 @@
 import { FC, useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
+
 import { formatSecondsToMinSec, milisecondsToSec, secondsToMs } from '../utils/time'
+import { AnimatedDigits } from './animated-digits'
 
 export const Timer: FC<{
 	isPlaying: boolean
@@ -57,16 +59,24 @@ export const Timer: FC<{
 	}, [isPlaying, onComplete])
 
 	const [min, sec] = formatSecondsToMinSec(timer)
+	const [m1, m2] = min
+	const [s1, s2] = sec
 
 	return (
 		<div
-			className={clsx('text-[256px] flex flex-col leading-[85%] overflow-hidden select-none', {
+			className={clsx('text-[256px] flex flex-col leading-[85%] select-none', {
 				'font-extralight': !isPlaying,
 				'font-extrabold': isPlaying,
 			})}
 		>
-			<span>{min}</span>
-			<span>{sec}</span>
+			<AnimatedDigits
+				d1={m1}
+				d2={m2}
+			/>
+			<AnimatedDigits
+				d1={s1}
+				d2={s2}
+			/>
 		</div>
 	)
 }

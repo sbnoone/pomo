@@ -58,7 +58,7 @@ function App() {
 	const initialTimeInSeconds = initialTimes[TIMER_STATES[state]]
 
 	return (
-		<div className='h-full flex bg-primary-50 dark:bg-primary-950 text-primary-900 dark:text-primary-50'>
+		<div className='h-full flex bg-primary-50 dark:bg-primary-950 text-primary-900 dark:text-primary-50 overflow-hidden'>
 			<SettingsModal
 				closeModal={closeModal}
 				isOpen={isModalOpen}

@@ -11,6 +11,7 @@
 	},
 	"dependencies": {
 		"@headlessui/react": "^1.7.14",
+		"@react-spring/web": "^9.7.2",
 		"clsx": "^1.2.1",
 		"dayjs": "^1.11.7",
 		"idb": "^7.1.1",
