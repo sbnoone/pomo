@@ -1,7 +1,8 @@
 import { DBSchema, openDB } from 'idb'
-import { TIMER_STATES } from '../app-constants'
+import { TIMER_STATES, noop } from '../app-constants'
+import { StorageValue } from 'zustand/middleware'
 
-interface Settings {
+export interface Settings {
 	focusLength: number
 	shortBreakLength: number
 	longBreakLength: number
@@ -11,7 +12,7 @@ interface Settings {
 interface AppDB extends DBSchema {
 	settings: {
 		key: string
-		value: Partial<Settings>
+		value: StorageValue<Partial<Settings>>
 	}
 	darkmode: {
 		key: string
@@ -23,7 +24,7 @@ interface AppDB extends DBSchema {
 	}
 }
 
-const appdb = await openDB<AppDB>('pomo', 1, {
+export const appdb = await openDB<AppDB>('pomo', 1, {
 	async upgrade(database) {
 		database.createObjectStore('settings')
 		database.createObjectStore('darkmode')
@@ -31,27 +32,13 @@ const appdb = await openDB<AppDB>('pomo', 1, {
 	},
 })
 
-export async function getStoredSettings() {
-	return appdb.get('settings', 'settings').catch(() => undefined)
-}
+export const initialSettings = await appdb.get('settings', 'settings').catch(noop)
 
-export async function setSettings(value: Partial<Settings>) {
-	return appdb.put('settings', value, 'settings').catch(() => undefined)
-}
+export const initialIsDarkMode = await appdb.get('darkmode', 'darkmode').catch(noop)
 
-export async function getIsDarkMode() {
-	return appdb.get('darkmode', 'darkmode').catch(() => undefined)
-}
+export const initialTimerState = await getTimerState()
 
-export async function setDarkMode(isDarkMode: boolean) {
-	return appdb.put('darkmode', isDarkMode, 'darkmode').catch(() => undefined)
-}
-
-export async function getTimerState() {
-	const state = await appdb.get('state', 'state').catch(() => undefined)
+async function getTimerState() {
+	const state = await appdb.get('state', 'state').catch(noop)
 	return typeof state !== 'number' || state < 0 || state > TIMER_STATES.length ? 0 : state
-}
-
-export async function setTimerState(state: number) {
-	return appdb.put('state', state, 'state').catch(() => undefined)
 }

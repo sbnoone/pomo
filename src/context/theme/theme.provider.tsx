@@ -1,9 +1,7 @@
 import { FC, PropsWithChildren, useEffect, useState } from 'react'
-import { getIsDarkMode, setDarkMode } from '../../storage/settings'
-import { ThemeModeEnum } from '../../app-constants'
+import { appdb, initialIsDarkMode } from '../../storage/settings'
+import { ThemeModeEnum, noop } from '../../app-constants'
 import { ThemeContext } from './theme.context'
-
-const initialIsDarkMode = await getIsDarkMode()
 
 export const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
 	const [isDarkMode, _setIsDarkMode] = useState(!!initialIsDarkMode)
@@ -18,7 +16,7 @@ export const ThemeProvider: FC<PropsWithChildren> = ({ children }) => {
 	}, [isDarkMode])
 
 	const setIsDarkMode = (isDarkMode: boolean) => {
-		setDarkMode(isDarkMode)
+		appdb.put('darkmode', isDarkMode, 'darkmode').catch(noop)
 		_setIsDarkMode(isDarkMode)
 	}
 	return (

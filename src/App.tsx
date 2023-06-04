@@ -10,16 +10,14 @@ import { Chip } from './components/chip'
 import { Button } from './components/button'
 import { Timer } from './components/timer'
 import { SettingsModal } from './components/settings-modal'
-import { getTimerState, setTimerState } from './storage/settings'
+import { initialTimerState, appdb } from './storage/settings'
 import { TimerState } from './types'
-import { NOTIFICATION_MESSAGES, TIMER_STATES } from './app-constants'
+import { NOTIFICATION_MESSAGES, TIMER_STATES, noop } from './app-constants'
 import { useSettings } from './store/settings'
-
-const initialState = await getTimerState()
 
 function App() {
 	const { focusLength, shortBreakLength, longBreakLength, hasNotifications } = useSettings()
-	const [state, setState] = useState(initialState ?? 0)
+	const [state, setState] = useState(initialTimerState ?? 0)
 	const [isPlaying, setIsPlaying] = useState(false)
 	const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -34,7 +32,7 @@ function App() {
 		setIsPlaying(false)
 		const nextState = (state + 1) % TIMER_STATES.length
 		setState(nextState)
-		setTimerState(nextState)
+		appdb.put('state', nextState, 'state').catch(noop)
 	}
 
 	const changeState = () => {
